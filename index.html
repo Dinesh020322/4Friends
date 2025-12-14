@@ -3,455 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>4Friends Studio | Gamifying Education</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-    <style>
-        /* --- GLOBAL STYLES --- */
-        :root {
-            --primary-dark: #121212;
-            --accent-blue: #3498db;
-            --accent-green: #2ecc71;
-            --accent-yellow: #f1c40f;
-            --text-light: #ffffff;
-            --text-gray: #bdc3c7;
-            --bg-gradient-problem: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--primary-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-        }
-
-        section {
-            padding: 80px 20px;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background: rgba(18, 18, 18, 0.95);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            border-bottom: 2px solid rgba(255,255,255,0.1);
-        }
-
-        .logo-text { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.5rem; letter-spacing: 2px;}
-
-        /* --- HERO SECTION --- */
-        #hero {
-            height: 100vh;
-            background: radial-gradient(circle at center, #2c3e50 0%, #000000 100%);
-            text-align: center;
-        }
-
-        #hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: -webkit-linear-gradient(eee, #3498db);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        #hero p { font-size: 1.5rem; color: var(--text-gray); max-width: 600px; }
-        
-        .scroll-down {
-            position: absolute; bottom: 30px; animation: bounce 2s infinite;
-        }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-20px);} 60% {transform: translateY(-10px);} }
-
-        /* --- PROBLEM SECTION --- */
-        #problem { background: var(--bg-gradient-problem); color: #333; text-align: center; }
-        .crisis-header { margin-bottom: 50px; }
-        .crisis-header h2 { color: #c0392b; font-size: 2.5rem;}
-
-        .journey-container {
-            display: flex; flex-direction: column; align-items: center; max-width: 800px; position: relative;
-        }
-
-        .path-line-container {
-            position: absolute; top: 0; left: 50%; height: 100%; width: 10px; transform: translateX(-50%); z-index: 0;
-        }
-        .path-line { width: 4px; height: 100%; background: #bdc3c7; border-radius: 2px; }
-        .path-progress { width: 4px; background: #c0392b; position: absolute; top: 0; left: 0; transition: height 0.5s ease; }
-
-        .checkpoint {
-            background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin: 30px 0; width: 80%; position: relative; z-index: 1; display: flex; align-items: center; text-align: left;
-        }
-        
-        .checkpoint:nth-child(odd) { transform: translateX(-50px); }
-        .checkpoint:nth-child(even) { transform: translateX(50px); flex-direction: row-reverse; text-align: right;}
-
-        .checkpoint-marker {
-            width: 40px; height: 40px; background: #c0392b; color: white; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-weight: bold; flex-shrink: 0; margin: 0 20px;
-        }
-        .stat-number { font-size: 1.8rem; font-weight: 900; color: #2c3e50; display: block;}
-        .stat-desc { color: #7f8c8d; }
-
-        /* --- SOLUTION SECTION --- */
-        #solution { background-color: #1a1a1a; text-align: center; }
-        .solution-header h2 { color: var(--accent-green); font-size: 2.5rem; margin-bottom: 40px;}
-
-        .methodology-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; width: 100%; max-width: 1000px;
-        }
-
-        .method-card {
-            background: #2c3e50; padding: 30px 20px; border-radius: 20px; transition: all 0.3s ease;
-            border-bottom: 5px solid var(--accent-blue); cursor: pointer;
-        }
-
-        .method-card:hover { transform: translateY(-15px) scale(1.05); background: #34495e; box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3); }
-        .method-icon { font-size: 3rem; margin-bottom: 20px;}
-        .method-card h3 { margin-bottom: 15px; color: var(--accent-blue);}
-        
-        .method-card:nth-child(2) { border-color: var(--accent-green); } .method-card:nth-child(2) h3 {color: var(--accent-green);}
-        .method-card:nth-child(3) { border-color: var(--accent-yellow); } .method-card:nth-child(3) h3 {color: var(--accent-yellow);}
-        .method-card:nth-child(4) { border-color: #e74c3c; } .method-card:nth-child(4) h3 {color: #e74c3c;}
-
-        /* --- INTERACTIVE DEMO SECTION --- */
-        #demo {
-            background: linear-gradient(to bottom, #1a1a1a, #2c3e50); padding-top: 50px;
-        }
-        
-        .demo-container {
-            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 40px;
-            display: flex; flex-wrap: wrap; gap: 40px; max-width: 1100px; border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .controls-area { flex: 1; min-width: 300px; }
-        .canvas-area {
-            flex: 2; min-width: 300px; background: rgba(0,0,0,0.3); border-radius: 15px; height: 500px; /* Increased height */
-            position: relative; overflow: hidden; border-bottom: 4px solid #2ecc71;
-        }
-
-        #gravityCanvas { width: 100%; height: 100%; }
-        
-        .slider-group { margin-bottom: 20px; }
-        .slider-group label { display: block; margin-bottom: 10px; font-weight: bold; color: var(--accent-blue);}
-        input[type=range] { width: 100%; cursor: pointer; }
-        
-        .reset-btn {
-            background: var(--accent-green); color: white; border: none; padding: 10px 25px; border-radius: 30px;
-            font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px;
-        }
-        .reset-btn:hover { background: #27ae60; box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);}
-
-        /* New Theory Box Styles */
-        .theory-feedback {
-            background: #2c3e50;
-            border-left: 4px solid var(--accent-yellow);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: #ecf0f1;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .theory-title { color: var(--accent-yellow); font-weight: bold; display: block; margin-bottom: 5px; font-size: 0.8rem; text-transform: uppercase;}
-
-        /* --- FOOTER --- */
-        footer { background: #000; padding: 30px; text-align: center; color: var(--text-gray); }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            #hero h1 { font-size: 2.5rem; }
-            .checkpoint { flex-direction: column !important; text-align: center !important; transform: none !important; width: 90%;}
-            .checkpoint-marker { margin: 0 0 15px 0; }
-            .path-line-container { left: 10%; }
-            .journey-container { align-items: flex-end; }
-            .demo-container { flex-direction: column; }
-            .canvas-area { height: 300px; }
-        }
-    </style>
+    <title>4FRIENDS INTERACTIVE | Redefining Digital Reality</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="preloader">
+        <div class="loader-text">INITIALIZING SYSTEM...</div>
+        <div class="loader-bar"></div>
+    </div>
 
-    <nav>
-        <div class="logo">
-            <div class="logo-text">4FRIENDS <span style="color:var(--accent-blue)">STUDIO</span></div>
+    <canvas id="canvas-container"></canvas>
+
+    <nav id="navbar">
+        <div class="brand-logo">4FRIENDS <span>INTERACTIVE</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">HOME</a></li>
+            <li><a href="about.html">MISSION</a></li>
+            <li><a href="services.html">CAPABILITIES</a></li>
+            <li><a href="projects.html">INNOVATIONS</a></li>
+            <li><a href="leadership.html">BOARD</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="#" class="btn-nav btn-login">LOGIN</a>
+            <a href="#" class="btn-nav btn-signup">SIGN UP →</a>
         </div>
+        <button class="mobile-menu-btn">☰</button>
     </nav>
 
-    <section id="hero">
-        <div data-aos="fade-up" data-aos-duration="1000">
-            <h1>Education is Broken.<br>We're Fixing it with Play.</h1>
-            <center><p>Stop memorizing. Start experiencing. Welcome to immersive learning.</p></center>
+    <section class="hero" id="home">
+        <h1>REDEFINING<br><span class="hero-glitch">DIGITAL REALITY</span></h1>
+        <p>4FRIENDS INTERACTIVE PRIVATE LIMITED<br>From Tamil Nadu to the Global Stage • We Engineer the Impossible</p>
+        <div class="hero-buttons">
+            <a href="about.html" class="btn-glow"><span>INITIATE EXPERIENCE</span></a>
+            <a href="contact.html" class="btn-glow btn-secondary"><span>GET IN TOUCH</span></a>
         </div>
-        <div class="scroll-down">
-            <p>Scroll to explore</p>
-            <span>▼</span>
-        </div>
+        <div class="scroll-indicator"></div>
     </section>
 
-    <section id="problem">
-        <div class="crisis-header" data-aos="fade-down">
-            <h2>The Learning Crisis</h2>
-            <p>Students are memorizing to pass, not understanding to learn.</p>
-        </div>
-        <div class="journey-container">
-            <div class="path-line-container">
-                <div class="path-line">
-                    <div class="path-progress" id="pathProgress"></div>
+    <section id="global-stats">
+        <div class="stats-grid spotlight-group">
+            <div class="glass-card stat-item reveal">
+                <div class="card-content">
+                    <div class="stat-number" data-target="2025">0</div>
+                    <p class="stat-label">YEAR INCORPORATED</p>
                 </div>
             </div>
-            <div class="checkpoint" data-aos="fade-right">
-                <div class="checkpoint-marker">1</div>
-                <div><span class="stat-number">256 Million</span><span class="stat-desc">Students Enter School. The journey begins with hope.</span></div>
+            <div class="glass-card stat-item reveal">
+                <div class="card-content">
+                    <div class="stat-number" data-target="5">0</div>
+                    <p class="stat-label">GLOBAL ENTERPRISES</p>
+                </div>
             </div>
-            <div class="checkpoint" data-aos="fade-left">
-                <div class="checkpoint-marker" style="background:#e67e22">2</div>
-                <div><span class="stat-number">Fear & Boredom</span><span class="stat-desc">Abstract concepts like Math & Science create disengagement.</span></div>
+            <div class="glass-card stat-item reveal">
+                <div class="card-content">
+                    <div class="stat-number" data-target="10">0</div>
+                    <p class="stat-label">CORE EXPERTS</p>
+                </div>
             </div>
-            <div class="checkpoint" data-aos="fade-right">
-                <div class="checkpoint-marker" style="background:#c0392b">3</div>
-                <div><span class="stat-number">The Drop Off</span><span class="stat-desc">Students fail 10th/12th boards or get low scores.</span></div>
-            </div>
-             <div class="checkpoint" data-aos="fade-up" style="background: #2c3e50; color: white;">
-                <div class="checkpoint-marker" style="background:#3498db">4</div>
-                <div><span class="stat-number" style="color:var(--accent-blue)">Only 43 Million</span><span class="stat-desc" style="color:#bdc3c7">Reach College. India loses 80% of its potential.</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="solution">
-        <div class="solution-header" data-aos="zoom-in">
-            <h2>Turning Concepts Into Experiences</h2>
-            <p>Our 4-step methodology for immersive learning.</p>
-        </div>
-        <div class="methodology-grid">
-            <div class="method-card" data-aos="flip-left" data-aos-delay="100">
-                <div class="method-icon">🗣️</div>
-                <h3>1. Explain</h3>
-                <p>Explain the idea in a simple, clear, child-friendly way.</p>
-            </div>
-            <div class="method-card" data-aos="flip-left" data-aos-delay="200">
-                <div class="method-icon">🧑‍🔬</div>
-                <h3>2. Simulate</h3>
-                <p>Don't just watch. Students experiment in a dynamic visual environment.</p>
-            </div>
-            <div class="method-card" data-aos="flip-left" data-aos-delay="300">
-                <div class="method-icon">🎮</div>
-                <h3>3. Interact</h3>
-                <p>Adjust inputs (cause) and instantly see the effect.</p>
-            </div>
-             <div class="method-card" data-aos="flip-left" data-aos-delay="400">
-                <div class="method-icon">🏆</div>
-                <h3>4. Play</h3>
-                <p>Reinforce the concept through gamified challenges and mastery.</p>
+            <div class="glass-card stat-item reveal">
+                <div class="card-content">
+                    <div class="stat-number" data-target="100">0</div>
+                    <p class="stat-label">% COMMITMENT</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="demo">
-        <div style="text-align: center; margin-bottom: 30px;" data-aos="fade-down">
-            <h2 style="color: var(--accent-yellow);">Example: The Gravity Lab</h2>
-            <p>Experience the "Simulate & Interact" phases right here.</p>
-        </div>
-
-        <div class="demo-container" data-aos="fade-up">
-            <div class="controls-area">
-                
-                <div style="background: rgba(241, 196, 15, 0.15); padding: 20px; border-radius: 15px; margin-bottom: 20px; border-left: 5px solid #f1c40f;">
-                    <h3 style="color: #f1c40f; margin-bottom: 10px; display: flex; align-items: center;">
-                        What is Gravity? 🍎
-                    </h3>
-                    <p style="font-size: 0.95rem; line-height: 1.6; color: #fff;">
-                        Gravity is an <strong>invisible pulling force</strong>. It works like a giant magnet inside the Earth that pulls everything down toward the ground!
-                    </p>
+    <section id="quick-overview" style="padding: 4rem 5%;">
+        <h2 class="section-title reveal">WHY 4FRIENDS INTERACTIVE</h2>
+        <p class="section-subtitle reveal">Innovation Meets Excellence</p>
+        <div class="innovation-grid spotlight-group">
+            <div class="glass-card reveal">
+                <div class="card-content">
+                    <div class="innovation-icon"></div>
+                    <h3 style="font-size:1.3rem; margin-bottom:0.5rem;">GLOBAL REACH</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">Deployed solutions across Japan, USA, UK with local Indian innovation</p>
                 </div>
-
-                <h3>Simulation Controls</h3>
-                <p style="color: #bdc3c7; margin-bottom: 20px; font-size: 0.9rem;">Adjust sliders to see the theory in action.</p>
-
-                <div id="dynamicTheory" class="theory-feedback">
-                    <span class="theory-title">💡 Science Fact:</span>
-                    <span id="theoryText">Move the sliders below to learn how gravity works!</span>
-                </div>
-
-                <div class="slider-group">
-                    <label for="gravitySlider">Gravity Force: <span id="gravityVal">Earth (9.8)</span></label>
-                    <input type="range" id="gravitySlider" min="1" max="20" value="9.8" step="0.1">
-                </div>
-
-                <div class="slider-group">
-                    <label for="massSlider">Object Size (Mass): <span id="massVal">Medium</span></label>
-                    <input type="range" id="massSlider" min="10" max="50" value="25">
-                </div>
-
-                <button class="reset-btn" onclick="resetSimulation()">Drop Ball Again</button>
             </div>
-
-            <div class="canvas-area" id="canvasContainer">
-                <canvas id="gravityCanvas"></canvas>
-                <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.5); font-size: 0.8rem;">Interactive Simulation Area</div>
+            <div class="glass-card reveal">
+                <div class="card-content">
+                    <div class="innovation-icon"></div>
+                    <h3 style="font-size:1.3rem; margin-bottom:0.5rem;">CUTTING-EDGE TECH</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">AR, VR, AI integration with Unity, Unreal, and custom solutions</p>
+                </div>
+            </div>
+            <div class="glass-card reveal">
+                <div class="card-content">
+                    <div class="innovation-icon"></div>
+                    <h3 style="font-size:1.3rem; margin-bottom:0.5rem;">PROVEN TRACK RECORD</h3>
+                    <p style="color:var(--text-muted); font-size:0.95rem;">Published games and enterprise solutions for Fortune 500 clients</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="logo">
-             <div class="logo-text" style="font-size: 1rem;">4FRIENDS <span style="color:var(--accent-blue)">STUDIO</span></div>
+    <section id="cta" style="text-align:center; padding: 4rem 5%;">
+        <h2 class="section-title reveal">READY TO GET STARTED?</h2>
+        <p class="section-subtitle reveal">Explore our capabilities and innovations</p>
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <a href="services.html" class="btn-glow reveal"><span>VIEW SERVICES</span></a>
+            <a href="projects.html" class="btn-glow btn-secondary reveal"><span>SEE PROJECTS</span></a>
         </div>
-        <p>© 2023 4Friends Studio. Transforming Education.</p>
+    </section>
+
+    <footer id="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="brand-logo" style="margin-bottom:1.5rem;">4FRIENDS <span>INTERACTIVE</span></div>
+                <p style="color:#999; line-height:1.8;">Empowering businesses with next-generation immersive solutions.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Mission</a></li>
+                    <li><a href="services.html">Capabilities</a></li>
+                    <li><a href="projects.html">Innovations</a></li>
+                    <li><a href="leadership.html">Company</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">SERVICES</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html#arvr">AR/VR Development</a></li>
+                    <li><a href="services.html#ai">AI Integration</a></li>
+                    <li><a href="services.html#gaming">Game Development</a></li>
+                    <li><a href="services.html#iot">IoT & Hardware</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title"></h4>
+                <p style="color:#999; line-height:1.8;">
+                    India : <br>P No 11, Avadi,<br>
+                    Tiruvallur,<br>
+                    Tamil Nadu, India, 602024
+                </p>
+                <p style="color:#999; margin-top:1rem;">Email: contact@4friends.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 4FRIENDS INTERACTIVE PRIVATE LIMITED. All Rights Reserved.
+        </div>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <script>
-        // Initialize Animate On Scroll
-        AOS.init();
-
-        // --- SCROLL PROGRESS ANIMATION ---
-        window.addEventListener('scroll', () => {
-            const problemSection = document.getElementById('problem');
-            const pathProgress = document.getElementById('pathProgress');
-            const sectionTop = problemSection.offsetTop;
-            const sectionHeight = problemSection.clientHeight;
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-            if (scrollPosition > sectionTop) {
-                let progress = (scrollPosition - sectionTop) / sectionHeight;
-                progress = Math.min(Math.max(progress, 0), 1);
-                pathProgress.style.height = (progress * 100) + '%';
-            }
-        });
-
-        // --- GRAVITY SIMULATION JS ---
-        const canvas = document.getElementById('gravityCanvas');
-        const ctx = canvas.getContext('2d');
-        const container = document.getElementById('canvasContainer');
-
-        canvas.width = container.clientWidth;
-        canvas.height = container.clientHeight;
-
-        let gravity = 9.8 * 0.05; 
-        let ballRadius = 25;
-        let x = canvas.width / 2;
-        let y = ballRadius + 10;
-        let dy = 0; 
-        let bounceFactor = 0.7; 
-
-        // DOM Elements
-        const gravitySlider = document.getElementById('gravitySlider');
-        const gravityValDisplay = document.getElementById('gravityVal');
-        const massSlider = document.getElementById('massSlider');
-        const massValDisplay = document.getElementById('massVal');
-        const theoryText = document.getElementById('theoryText'); // The new text box
-
-        function drawBall() {
-            ctx.beginPath();
-            ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-            let gradient = ctx.createRadialGradient(x-5, y-5, ballRadius/4, x, y, ballRadius);
-            gradient.addColorStop(0, "#f1c40f");
-            gradient.addColorStop(1, "#e67e22");
-            ctx.fillStyle = gradient;
-            ctx.fill();
-            ctx.closePath();
-
-            // Leaf
-            ctx.beginPath();
-            ctx.moveTo(x, y - ballRadius);
-            ctx.quadraticCurveTo(x + 10, y - ballRadius - 15, x, y - ballRadius - 20);
-            ctx.quadraticCurveTo(x - 10, y - ballRadius - 15, x, y - ballRadius);
-            ctx.fillStyle = "#2ecc71";
-            ctx.fill();
-        }
-
-        function updatePhysics() {
-            dy += gravity;
-            y += dy;
-            if (y + ballRadius > canvas.height) {
-                y = canvas.height - ballRadius;
-                if(dy > 0) dy = -dy * bounceFactor;
-                if (Math.abs(dy) < 1 && y > canvas.height - ballRadius - 2) {
-                    dy = 0;
-                    y = canvas.height - ballRadius;
-                }
-            }
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBall();
-            updatePhysics();
-        }
-
-        // --- NEW: UPDATED EVENT LISTENERS WITH THEORY EXPLANATIONS ---
-
-        gravitySlider.oninput = function() {
-            let val = parseFloat(this.value);
-            
-            // 1. Update Label
-            if(val < 4) gravityValDisplay.innerText = `Moon (${val})`;
-            else if(val > 15) gravityValDisplay.innerText = `Jupiter (${val})`;
-            else gravityValDisplay.innerText = `Earth (${val})`;
-            
-            // 2. Update Physics
-            gravity = val * 0.05; 
-
-            // 3. Update Theory Explanation (Educational Part)
-            if (val < 4) {
-                theoryText.innerHTML = "🌑 <strong>Low Gravity:</strong> The Moon is smaller than Earth, so it has a weaker pull. Things fall in slow motion here!";
-            } else if (val > 15) {
-                theoryText.innerHTML = "🪐 <strong>High Gravity:</strong> Jupiter is a massive planet! Its strong magnet-like pull drags objects down super fast.";
-            } else {
-                theoryText.innerHTML = "🌍 <strong>Normal Gravity:</strong> This is Earth! The gravity here is just right for us to walk and play.";
-            }
-        }
-
-        massSlider.oninput = function() {
-            let val = parseInt(this.value);
-            
-            // 1. Update Label
-            massValDisplay.innerText = val < 20 ? "Small" : val > 40 ? "Large" : "Medium";
-            
-            // 2. Update Physics
-            ballRadius = val;
-
-            // 3. Update Theory Explanation
-            theoryText.innerHTML = "🍎 <strong>Mass & Size:</strong> You changed the size! Fun fact: In a vacuum (no air), a big apple and a small grape would fall at the exact same speed!";
-        }
-
-        function resetSimulation() {
-            y = ballRadius + 10;
-            dy = 0;
-            x = (canvas.width / 2) + (Math.random() * 40 - 20); 
-        }
-
-        window.addEventListener('resize', () => {
-             canvas.width = container.clientWidth;
-             canvas.height = container.clientHeight;
-             x = canvas.width / 2;
-             resetSimulation();
-        });
-
-        animate();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

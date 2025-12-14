@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | 4FRIENDS INTERACTIVE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="canvas-container"></canvas>
+
+    <nav id="navbar">
+        <div class="brand-logo">4FRIENDS <span>INTERACTIVE</span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">MISSION</a></li>
+            <li><a href="services.html">CAPABILITIES</a></li>
+            <li><a href="projects.html">INNOVATIONS</a></li>
+            <li><a href="leadership.html">BOARD</a></li>
+            <li><a href="contact.html" class="active">CONTACT</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="#" class="btn-nav btn-login">LOGIN</a>
+            <a href="#" class="btn-nav btn-signup">SIGN UP →</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </nav>
+
+    <section class="page-hero">
+        <h1 class="page-hero-title">GET IN <span class="hero-glitch">TOUCH</span></h1>
+        <p class="page-hero-subtitle">Let's Build Something Amazing Together</p>
+    </section>
+
+    <section id="contact" style="padding: 4rem 5%;">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+            <!-- Contact Form -->
+            <div class="glass-card reveal">
+                <div class="card-content">
+                    <h3 style="font-family:'Orbitron', sans-serif; font-size:1.8rem; margin-bottom:2rem; color:#fff;">SEND US A MESSAGE</h3>
+                    <div class="contact-form">
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display:block; color:var(--primary-neon); margin-bottom:0.5rem; font-family:'Rajdhani', sans-serif; font-weight:600;">YOUR NAME</label>
+                            <input type="text" id="contact-name" placeholder="Enter your name" style="width:100%; padding:0.8rem; background:rgba(0,243,255,0.05); border:1px solid var(--glass-border); color:#fff; font-family:'Inter', sans-serif; border-radius:4px;" />
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display:block; color:var(--primary-neon); margin-bottom:0.5rem; font-family:'Rajdhani', sans-serif; font-weight:600;">EMAIL ADDRESS</label>
+                            <input type="email" id="contact-email" placeholder="your@email.com" style="width:100%; padding:0.8rem; background:rgba(0,243,255,0.05); border:1px solid var(--glass-border); color:#fff; font-family:'Inter', sans-serif; border-radius:4px;" />
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display:block; color:var(--primary-neon); margin-bottom:0.5rem; font-family:'Rajdhani', sans-serif; font-weight:600;">PROJECT TYPE</label>
+                            <select id="contact-project" style="width:100%; padding:0.8rem; background:rgba(243, 243, 243, 0.05); border:1px solid var(--glass-border); color:#727272; font-family:'Inter', sans-serif; border-radius:4px;">
+                                <option value="">Select a service</option>
+                                <option value="ar-vr">AR/VR Development</option>
+                                <option value="ai">AI Integration</option>
+                                <option value="gaming">Game Development</option>
+                                <option value="iot">IoT & Hardware</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display:block; color:var(--primary-neon); margin-bottom:0.5rem; font-family:'Rajdhani', sans-serif; font-weight:600;">MESSAGE</label>
+                            <textarea id="contact-message" rows="5" placeholder="Tell us about your project..." style="width:100%; padding:0.8rem; background:rgba(0,243,255,0.05); border:1px solid var(--glass-border); color:#fff; font-family:'Inter', sans-serif; border-radius:4px; resize:vertical;"></textarea>
+                        </div>
+                        <button onclick="handleContactSubmit()" class="btn-glow" style="width:100%; cursor:pointer;"><span>SEND MESSAGE</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <div class="glass-card reveal" style="margin-bottom: 2rem;">
+                    <div class="card-content">
+                        <h3 style="font-family:'Orbitron', sans-serif; font-size:1.5rem; margin-bottom:1.5rem; color:#fff;">Location</h3>
+                        <p style="color:var(--text-muted); line-height:1.8; margin-bottom:1rem;">
+                            <strong style="color:var(--primary-neon);">4FRIENDS INTERACTIVE PVT LTD</strong><br>
+                            <p style="color:#999; line-height:1.8;">
+                    India : <br>P No 11, Avadi,<br>
+                    Tiruvallur,<br>
+                    Tamil Nadu, India, 602024
+                </p>
+                        </p>
+                        <p style="color:var(--text-muted); margin-top:1.5rem;">
+                            <strong style="color:var(--primary-neon);">Email:</strong> contact@4friends.in<br>
+                            <strong style="color:var(--primary-neon);">Phone:</strong> +91 044 1234 5678
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-card reveal">
+                    <div class="card-content">
+                        <h3 style="font-family:'Orbitron', sans-serif; font-size:1.5rem; margin-bottom:1.5rem; color:#fff;">LEGAL INFORMATION</h3>
+                        <div class="cin-box" style="margin-bottom:1rem;">CIN: U58203TN2025PTC184579</div>
+                        <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.8;">
+                            <strong style="color:var(--primary-neon);">Company Type:</strong> Private Limited<br>
+                            <strong style="color:var(--primary-neon);">Status:</strong> Active<br>
+                            <strong style="color:var(--primary-neon);">ROC:</strong> Chennai
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 2rem 5%; text-align:center;">
+        <h2 class="section-title reveal">FOLLOW OUR JOURNEY</h2>
+        <p class="section-subtitle reveal">Stay updated with our latest innovations</p>
+        <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;">
+            <a href="#" class="social-link">LinkedIn</a>
+            <a href="#" class="social-link">Twitter</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">GitHub</a>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="footer-grid">
+            <div>
+                <div class="brand-logo" style="margin-bottom:1.5rem;">4FRIENDS <span>INTERACTIVE</span></div>
+                <p style="color:#999; line-height:1.8;">Empowering businesses with next-generation immersive solutions.</p>
+            </div>
+            <div>
+                <h4 class="footer-title">QUICK LINKS</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">Mission</a></li>
+                    <li><a href="services.html">Capabilities</a></li>
+                    <li><a href="projects.html">Innovations</a></li>
+                    <li><a href="leadership.html">Board</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title">SERVICES</h4>
+                <ul class="footer-links">
+                    <li><a href="services.html#arvr">AR/VR Development</a></li>
+                    <li><a href="services.html#ai">AI Integration</a></li>
+                    <li><a href="services.html#gaming">Game Development</a></li>
+                    <li><a href="services.html#iot">IoT & Hardware</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title"></h4>
+                <p style="color:#999; line-height:1.8;">
+                    India : <br>P No 11, Avadi,<br>
+                    Tiruvallur,<br>
+                    Tamil Nadu, India, 602024
+                </p>
+                <p style="color:#999; margin-top:1rem;">Email: contact@4friends.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2025 4FRIENDS INTERACTIVE PRIVATE LIMITED. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
